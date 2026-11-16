@@ -1,0 +1,8 @@
+{
+  "asset": "A-stacked-windows.png",
+  "generator": "OpenAI image_gen",
+  "prompt": "Use case: logo-brand. Create a single refined macOS application icon concept for BroClean, a local utility managing browser instances and headless browsers. Concept A: two overlapping browser windows, reduced to a confident white rounded rectangular frame in front and a quiet offset slate-blue frame behind, one tiny status dot. Square 1024x1024 canvas. Center one macOS rounded-square tile occupying about 80% of the canvas, with a muted deep blue tile and subtle native-app dimensional lighting. Nearly flat geometry, restrained, precise, very legible at 32px. Transparent outside the icon tile. No words, letters, numerals, labels, comparison board, browser brand logos, glossy glass, broom, shield, sparkles or decorative motifs. Premium understated Mac utility.",
+  "approved": "2026-11-16",
+  "use": "BroClean app icon, option A",
+  "exports": "Deterministic sips resize and macOS iconutil ICNS packaging; original design retained."
+}

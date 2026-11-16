@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-16T12:26:47.999640+00:00",
+  "title": "Design System: BroClean",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Restrained blue"
+      },
+      "ink-light": {
+        "role": "primary",
+        "displayName": "Ink in light appearance"
+      },
+      "ink-dark": {
+        "role": "primary",
+        "displayName": "Ink in dark appearance"
+      },
+      "pale": {
+        "role": "primary",
+        "displayName": "Pale blue overlay"
+      },
+      "soft": {
+        "role": "primary",
+        "displayName": "Soft blue overlay"
+      },
+      "on-accent": {
+        "role": "neutral",
+        "displayName": "Cleanup label white"
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "Application title",
+        "purpose": "BroClean header."
+      },
+      "review-title": {
+        "displayName": "Review title",
+        "purpose": "Close confirmation heading."
+      },
+      "source-title": {
+        "displayName": "Source title",
+        "purpose": "Primary identity in each browser row."
+      },
+      "body": {
+        "displayName": "Review body",
+        "purpose": "Warnings and confirmation copy."
+      },
+      "memory": {
+        "displayName": "Memory value",
+        "purpose": "Resource column; monospaced digits."
+      },
+      "supporting": {
+        "displayName": "Supporting information",
+        "purpose": "Summaries, details, feedback and footer."
+      },
+      "label": {
+        "displayName": "Compact native labels",
+        "purpose": "Column headings and browser/mode metadata."
+      }
+    },
+    "nativePlatform": {
+      "platform": "macOS 14+, SwiftUI/AppKit",
+      "dimensions": "Native points; no web breakpoint is implied.",
+      "semanticColors": {
+        "background": "NSColor.windowBackgroundColor",
+        "secondaryText": "SwiftUI .secondary",
+        "destructive": "SwiftUI .red"
+      },
+      "appearanceBinding": {
+        "Theme.ink": {
+          "darkAqua": "colors.ink-dark",
+          "otherwise": "colors.ink-light"
+        }
+      },
+      "elevation": "NSPanel.hasShadow = true; OS-owned parameters.",
+      "motion": "Native sheets, menus and controls; no explicit duration or easing tokens.",
+      "font": "SwiftUI .system, rendered as the macOS system family; no custom line height or tracking.",
+      "sourceMark": "Template images for Claude and ChatGPT; SF Symbols for other source classes. Cues do not guarantee attribution.",
+      "componentSources": [
+        {
+          "name": "Header and filters",
+          "refersTo": "header",
+          "source": "BrowserPanel.header",
+          "behavior": "Native small segmented picker and borderless sort menu; refresh supports Command-R."
+        },
+        {
+          "name": "Visible group band",
+          "refersTo": "group-band",
+          "source": "GroupHeading",
+          "behavior": "Trailing X opens frozen eligible visible-group review; disabled during work or with no targets."
+        },
+        {
+          "name": "Browser row",
+          "refersTo": "browser-row",
+          "source": "BrowserRow",
+          "behavior": "Plain detail toggle, fixed numeric columns, separate close and overflow menu."
+        },
+        {
+          "name": "Protected row",
+          "refersTo": "browser-row-protected",
+          "source": "BrowserRow",
+          "behavior": "Pale tint plus lock; expanded unprotected rows also use the pale tint."
+        },
+        {
+          "name": "Cleanup menu",
+          "refersTo": "cleanup-menu",
+          "source": "BrowserPanel.footer",
+          "behavior": "Reviews global eligible headless/automated instances; separate scope from the group X."
+        },
+        {
+          "name": "Close review",
+          "refersTo": "close-review",
+          "source": "CloseReview",
+          "behavior": "Lists frozen targets and skips; warns for personal targets; Cancel and explicit counted destructive action."
+        },
+        {
+          "name": "Repository input",
+          "source": "RepositorySettings",
+          "behavior": "Native roundedBorder TextField, validated Save and Cancel."
+        }
+      ]
+    },
+    "documentationScope": {
+      "authority": [
+        "PRODUCT.md",
+        ".impeccable/surfaces/sources-browserscopeapp-browserpanel-swift.md",
+        "Sources/BrowserScopeApp/BrowserPanel.swift",
+        "Sources/BrowserScopeApp/App.swift"
+      ],
+      "review": ".impeccable/review/finish-review.md",
+      "status": "Code-led shipped-scope extraction; no approved image comp.",
+      "companion": "HTML preview is separate and simulated; no companion specimens are generated here.",
+      "tokenPolicy": "No synthesized tonal ramps, shadow values, animation tokens or breakpoints. Frontmatter owns implemented primitives; native extensions preserve OS semantics that CSS cannot represent faithfully.",
+      "openDecision": "Option A, stacked browser windows on a blue tile, approved 2026-11-16 for version 0.3.0.",
+      "verificationLimits": [
+        "Native dark appearance and review were visually reviewed.",
+        "Native light appearance, VoiceOver, full keyboard traversal, long names, dense feedback and status-bar placement were not independently exercised by the finish reviewer.",
+        "No real user processes were terminated during validation."
+      ]
+    }
+  },
+  "components": [],
+  "narrative": {
+    "northStar": "Compact index of browser ownership",
+    "overview": "BroClean uses a restrained native Mac surface to make browser sources and their current state easy to scan. Quiet blue tints organize information; monochrome source marks and aligned resource figures give the list its character. Consequential actions reveal their scope before execution.\n\nThis is a code-led record of the approved scheme 2 direction, extracted from `Sources/BrowserScopeApp/BrowserPanel.swift` and `App.swift`. The native application is the authority here. The companion HTML preview is a separate, simulated presentation and does not define native control rendering, responsive behavior, or accessibility. No approved image comp governs this build. The approved launch icon is option A, stacked browser windows on a blue tile, shipped from version 0.3.0; the menu-bar symbol remains the system globe.\n",
+    "keyCharacteristics": [
+      "Native macOS controls and system typography.",
+      "Restrained blue accent with appearance-aware ink and translucent grouping.",
+      "Monochrome source cues, aligned values, and visible uncertainty.",
+      "Reviewable close actions with visible protection and exclusions."
+    ],
+    "rules": [
+      {
+        "name": "The Semantic Surface Rule",
+        "body": "Preserve the native window background, semantic text styles and appearance-aware ink together; a fixed background or fixed ink branch breaks their relationship.",
+        "section": "colors"
+      },
+      {
+        "name": "The Visible Group Rule",
+        "body": "A group X freezes the currently filtered group's eligible targets into a review sheet; it never silently expands the selection when the process list changes.",
+        "section": "components"
+      }
+    ],
+    "dos": [
+      "**Do** retain native controls, keyboard access and semantic appearance bindings.",
+      "**Do** pair monochrome source cues with readable names and inspectable attribution evidence.",
+      "**Do** preserve aligned resource values, unknown dashes and partial-memory markers.",
+      "**Do** show frozen group targets, exclusions and personal-browser warnings before closure.",
+      "**Do** preserve a lock as well as tint for protection."
+    ],
+    "donts": [
+      "**Don't** treat source marks as proof of ownership or inference as certainty.",
+      "**Don't** promote companion HTML measurements or browser control styles into the native system.",
+      "**Don't** imply that protection blocks an explicitly reviewed individual close.",
+      "**Don't** turn a group X into immediate or automatic termination.",
+      "**Don't** replace the approved A launch icon with an unapproved candidate."
+    ]
+  }
+}

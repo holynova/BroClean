@@ -1,0 +1,7 @@
+.build/
+.swiftpm/
+dist/
+.DS_Store
+docs/screenshots/
+.browser-lab/
+scripts/browser-lab/node_modules/

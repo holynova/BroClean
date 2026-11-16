@@ -1,0 +1,1 @@
+{"name":"browser-scope-test-lab","private":true,"version":"1.0.0","dependencies":{"playwright-core":"1.63.0","puppeteer-core":"25.10.0"}}
