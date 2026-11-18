@@ -1,20 +1,18 @@
+<p align="right"><a href="README.en.md">English</a></p>
+
 <p align="center">
   <img src="./assets/readme/hero.svg" width="100%" alt="BroClean — 菜单栏里的浏览器实例管家：三层叠放的浏览器窗口，分别标注 Playwright、Claude（已保护）、Codex，右下角一枚绿色保护盾">
 </p>
 
 <p align="center">
-  <a href="https://github.com/holynova/BroClean/releases/latest"><strong>▶ 下载 macOS 版 Download for macOS</strong></a>
+  <a href="https://github.com/holynova/BroClean/releases/latest"><strong>▶ 下载 macOS 版</strong></a>
   ·
   <a href="https://github.com/holynova/BroClean/releases/tag/v0.3.0">0.3.0 更新说明</a>
-  ·
-  <a href="README.en.md">English version</a>
 </p>
 
 AI 工具或自动化测试结束后，浏览器可能仍在后台运行。BroClean 是原生 macOS 菜单栏应用，把浏览器实例、推断的启动来源和资源占用放在一起：先看清情况，再决定关闭哪些——保护正在使用的实例，按组清理其余的。原生 SwiftUI + AppKit，macOS 14+，Apple Silicon。
 
-After AI tools or automated tests finish, browsers can keep running in the background. BroClean is a native macOS menu bar app that shows browser instances, their inferred launch source and resource usage together — so you see the full picture before closing anything: protect the instances still in use, then clean up the rest by group. Native SwiftUI + AppKit, macOS 14+, Apple Silicon.
-
-## 截图 / Screenshots
+## 截图
 
 <p align="center">
   <img src="./assets/readme/browser-groups.png" width="360" alt="BroClean 原生分组界面：自动化组包含 Playwright、Claude、Codex、ChatGPT，Claude 已保护；个人组包含 Safari；各组右侧有独立关闭按钮">
@@ -23,7 +21,7 @@ After AI tools or automated tests finish, browsers can keep running in the backg
 
 *真实原生应用截图，使用演示数据。界面目前为英文；演示模式不会关闭真实进程。*
 
-## 从发现到关闭 / From Discovery to Close
+## 从发现到关闭
 
 - **辨认来源**：单色图标与来源名称帮助定位实例；展开详情可查看推断依据、启动器及进程信息。来源按进程关系与启动参数推断，不代表对应应用的官方集成。
 - **缩小范围**：在 All、Automated、Headless 之间筛选，按内存、页面数、运行时长等排序。
@@ -32,7 +30,7 @@ After AI tools or automated tests finish, browsers can keep running in the backg
 - **批量有分寸**：批量执行时可查看进度、停止剩余任务。单实例关闭与强制退出是独立入口；普通关闭不会自动升级为强制退出。保护项仍可通过明确选择的单实例操作关闭。
 - **不做多余的事**：不自动清理，不删除浏览器配置或用户数据；发出终止请求前会重新校验进程身份、所属用户与可执行路径。
 
-## 如何理解这些数据 / Reading the Numbers
+## 如何理解这些数据
 
 | 显示内容 | 含义与边界 |
 | --- | --- |
@@ -43,7 +41,7 @@ After AI tools or automated tests finish, browsers can keep running in the backg
 
 识别范围包括 Chrome、Chrome for Testing、Chromium、Edge、Firefox 和 Safari；不同浏览器可提供的数据不同。自动化批量清理还会排除标准配置和不确定的实例。
 
-## 开始使用 / Getting Started
+## 开始使用
 
 1. 从 [Releases](https://github.com/holynova/BroClean/releases/latest) 下载 `BroClean-0.3.0-macOS-arm64.zip`，解压得到 `BroClean.app`。
 2. 将应用移入"应用程序"后打开，点击菜单栏中的 BroClean 图标查看列表。
@@ -51,7 +49,7 @@ After AI tools or automated tests finish, browsers can keep running in the backg
 
 安装包适用于 **Apple Silicon / macOS 14 或更新版本**，运行应用无需安装 Swift、Node.js 或 Python。当前发行版采用本地 ad-hoc 签名，尚未进行 Apple 公证。Release 中附有 SHA-256 校验文件。
 
-## CLI 与源码构建 / CLI & Building from Source
+## CLI 与源码构建
 
 需要 macOS 14+ 和 **Swift 6 工具链**。桌面端与 CLI 没有第三方运行时依赖。
 
@@ -86,22 +84,10 @@ open dist/BroClean.app --args --demo --preview-window
 
 </details>
 
-## 深入了解 / Learn More
+## 深入了解
 
 - [架构与实现](docs/ARCHITECTURE.md) · [界面设计规范](DESIGN.md)
 - [0.3.0 发行说明](docs/RELEASE-0.3.0.md) · [验证记录](docs/VALIDATION.md)
 - [可重复的浏览器实验场景](docs/BROWSER-LAB.md) · [产品行为约定](docs/PRODUCT-SPEC.md)
 
 0.3.0 已通过 **33 项 Swift Testing 测试**，并完成 Release 构建、应用包签名及安装包校验。更全面的系统兼容性与长期运行验证仍需持续完善。发现问题时，欢迎通过 [Issues](https://github.com/holynova/BroClean/issues) 提供 macOS 版本、浏览器类型与复现步骤。
-
-## English
-
-**BroClean** is a native macOS menu bar app for inspecting and closing browser instances left behind by AI tools and automation. See every instance with its inferred launch source and resource usage, protect the ones still in use, then clean up the rest by group.
-
-- **Identify the source**: monochrome icons and source names locate each instance; expand for inference evidence, launcher and process info. Sources are inferred from process relationships and launch arguments — not an official integration with the named app.
-- **Narrow it down**: filter across All / Automated / Headless; sort by memory, pages, age and more.
-- **Protect your work**: protection persists by process identity (PID + kernel start time) and is shared with the CLI; group and bulk cleanup skip protected items.
-- **Review before closing**: the `×` on a group header shows exactly what will close and what will be skipped. Only the currently visible group is affected; the Personal group gets an extra warning.
-- **Coverage**: Chrome, Chrome for Testing, Chromium, Edge, Firefox and Safari. Memory is a process-tree RSS estimate; page counts come from local CDP endpoints when readable (`—` when not — never faked from process counts).
-- **CLI included**: `broclean list`, `broclean close --headless --dry-run`, `broclean protect` — same scanner, grouping and protection logic as the app. `--dry-run` prints the plan and sends no signals. See [docs/CLI.md](docs/CLI.md).
-- **Download**: [latest release](https://github.com/holynova/BroClean/releases/latest) (`BroClean-0.3.0-macOS-arm64.zip`, Apple Silicon, macOS 14+). Build from source with the Swift 6 toolchain: `swift test --disable-xctest && ./scripts/build-app.sh`. Full English README: [README.en.md](README.en.md).

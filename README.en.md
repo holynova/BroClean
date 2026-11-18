@@ -1,66 +1,57 @@
-<p align="center">
-  <img src="assets/readme/app-icon.png" width="80" alt="BroClean app icon: stacked browser windows on a blue tile">
-</p>
-
-<h1 align="center">BroClean</h1>
-
-<p align="center">Inspect browser sources, protect active work, and close groups from your menu bar.</p>
-
-<p align="center"><a href="README.md">简体中文</a> · <strong>English</strong></p>
+<p align="right"><a href="README.md">中文</a></p>
 
 <p align="center">
-  <a href="https://github.com/holynova/BroClean/releases/latest"><strong>Download for macOS</strong></a> ·
-  <a href="https://github.com/holynova/BroClean/releases/tag/v0.3.0">What's new in 0.3.0</a> ·
-  <a href="https://github.com/holynova/BroClean/issues">Report an issue</a>
+  <img src="./assets/readme/hero.svg" width="100%" alt="BroClean — a menu bar manager for browser instances: three stacked browser windows labeled Playwright, Claude (protected), and Codex, with a green protection shield at the bottom right">
 </p>
-
-<p align="center">macOS 14+ · Apple Silicon download · Native SwiftUI + AppKit</p>
-
-Browsers can keep running after an AI tool or automated test finishes. BroClean brings browser instances, their inferred launch sources, and resource usage into one view, so you can inspect them before deciding what to close.
 
 <p align="center">
-  <img src="assets/readme/browser-groups.png" width="400" alt="Native BroClean interface showing Playwright, Claude, Codex and ChatGPT in the automated group, protected Claude, and Safari in the personal group, with a close button for each group">
+  <a href="https://github.com/holynova/BroClean/releases/latest"><strong>▶ Download for macOS</strong></a>
+  ·
+  <a href="https://github.com/holynova/BroClean/releases/tag/v0.3.0">What's new in 0.3.0</a>
 </p>
 
-*Actual native app screenshot using demo data. The interface is currently in English; demo mode never closes real processes.*
+After AI tools or automated tests finish, browsers can keep running in the background. BroClean is a native macOS menu bar app that shows browser instances, their inferred launch source and resource usage together — so you see the full picture before closing anything: protect the instances still in use, then clean up the rest by group. Native SwiftUI + AppKit, macOS 14+, Apple Silicon.
 
-## Get started
-
-1. Download `BroClean-0.3.0-macOS-arm64.zip` from [Releases](https://github.com/holynova/BroClean/releases/latest) and unzip it.
-2. Move `BroClean.app` to Applications and open it. Click the BroClean menu-bar icon to see your browsers.
-3. Click a source name to inspect its evidence. Use the row's `…` menu to protect instances you want to keep running.
-
-The download requires **Apple Silicon and macOS 14 or later**. Running the app does not require Swift, Node.js, or Python. The current release is locally ad-hoc signed and is not Apple-notarized. A SHA-256 checksum file is included with the release.
-
-## From inspection to cleanup
-
-- **Recognize sources.** Monochrome marks and source labels help you locate instances. Expand a row for inference evidence, launcher details, and process information.
-- **Narrow the view.** Filter by All, Automated, or Headless, then sort by memory, page count, age, and more.
-- **Protect active work.** Protection persists by process identity and is shared with the CLI. Group and bulk cleanup skip protected instances.
-- **Review before closing.** The `×` in each group header opens a list of targets and exclusions. It selects only that group's currently visible instances. Personal-browser groups include an additional warning about interrupting windows and active work.
+## Screenshots
 
 <p align="center">
-  <img src="assets/readme/close-review.png" width="360" alt="Automated-group confirmation listing three close targets and explicitly skipping protected Claude">
+  <img src="./assets/readme/browser-groups.png" width="360" alt="BroClean's native grouped interface: the automated group holds Playwright, Claude, Codex, and ChatGPT with Claude protected; the personal group holds Safari; each group has its own close button">
+  <img src="./assets/readme/close-review.png" width="360" alt="Close confirmation for the automated group: three instances listed for closing, with protected Claude explicitly skipped">
 </p>
 
-*The review lists the instances that will close and explains which ones are skipped.*
+*Real native app screenshots using demo data. The interface is currently in English; demo mode never closes real processes.*
 
-Batch operations show progress and let you stop the remaining work. Individual close and force quit are separate actions; a normal close never escalates automatically. A protected instance can still be closed through an explicitly selected individual action.
+## From Discovery to Close
 
-## Understand the readings
+- **Identify the source**: monochrome icons and source names locate each instance; expand for inference evidence, launcher and process info. Sources are inferred from process relationships and launch arguments — not an official integration with the named app.
+- **Narrow it down**: filter across All / Automated / Headless; sort by memory, pages, age and more.
+- **Protect your work**: protection persists by process identity (PID + kernel start time) and is shared with the CLI; group and bulk cleanup skip protected items.
+- **Review before closing**: the `×` on a group header shows exactly what will close and what will be skipped. Only the currently visible group is affected; the Personal group gets an extra warning that closing may interrupt windows and work.
+- **Bulk, with restraint**: watch progress and stop remaining tasks during bulk runs. Closing a single instance and force-quitting are separate actions; an ordinary close never escalates to a force quit on its own. A protected item can still be closed through an explicit single-instance action.
+- **Nothing extra**: no automatic cleanup, no deleting browser profiles or user data; process identity, owning user, and executable path are re-verified before any termination request is sent.
 
-| Reading | Meaning and limits |
+## Reading the Numbers
+
+| Shown as | Meaning and limits |
 | --- | --- |
-| Source | Inferred from process ancestry and launch arguments, not an official integration with the named application. |
-| Memory | Estimated process-tree RSS, not guaranteed reclaimable memory. `+` means the reading is incomplete. |
-| Pages | Read from an accessible, local, process-owned CDP endpoint when available. `—` means unavailable; process counts are never substituted for page counts. |
-| Safari | App-level detection. Shared WebKit services are excluded from its memory total, and page counts are unavailable. |
+| Source name | Inferred from process relationships and launch arguments; not an official integration with the named app. |
+| Memory | A process-tree RSS estimate, not the memory that closing would free; `+` means the data is incomplete. |
+| Page count | Read from local, process-owned CDP endpoints when available; `—` when unreadable — never faked from process counts. |
+| Safari | App-level identification only; shared WebKit services are excluded from its memory total, and page counts are unavailable. |
 
-Detection covers Chrome, Chrome for Testing, Chromium, Edge, Firefox, and Safari; available readings vary by browser. Automated bulk cleanup also excludes standard-profile and uncertain instances. Before termination, the app rechecks process identity, ownership, and executable path. BroClean does not perform automatic cleanup or delete browser profiles or user data.
+Coverage includes Chrome, Chrome for Testing, Chromium, Edge, Firefox and Safari; the data each browser can provide differs. Automated bulk cleanup also excludes standard configurations and uncertain instances.
 
-## CLI and source builds
+## Get Started
 
-Requires macOS 14+ and the **Swift 6 toolchain**. The desktop app and CLI have no third-party runtime dependencies.
+1. Download `BroClean-0.3.0-macOS-arm64.zip` from [Releases](https://github.com/holynova/BroClean/releases/latest) and unzip it to get `BroClean.app`.
+2. Move the app into Applications, open it, and click the BroClean icon in the menu bar to see the list.
+3. Click a source name to see how it was identified; protect instances that should keep running from the `…` menu at the end of the row.
+
+The installer is for **Apple Silicon / macOS 14 or later**; running the app needs no Swift, Node.js, or Python install. The current release uses a local ad-hoc signature and has not been Apple-notarized. Each release includes a SHA-256 checksum file.
+
+## CLI & Building from Source
+
+Requires macOS 14+ and the **Swift 6 toolchain**. The app and the CLI have no third-party runtime dependencies.
 
 ```sh
 git clone https://github.com/holynova/BroClean.git
@@ -70,7 +61,7 @@ swift test --disable-xctest
 open dist/BroClean.app
 ```
 
-The CLI shares detection, termination, and protection logic with the app. Inspect the list, then preview a cleanup plan:
+The CLI shares the app's scanning, closing, and protection logic. List first, then preview the cleanup scope:
 
 ```sh
 ./scripts/build-cli.sh
@@ -78,25 +69,25 @@ The CLI shares detection, termination, and protection logic with the app. Inspec
 ./dist/broclean close --headless --dry-run
 ```
 
-`--dry-run` reports the plan without sending termination signals. See the [CLI reference](docs/CLI.md) for JSON output, individual targets, and protection commands.
+`--dry-run` prints the plan and sends no termination signals. JSON output, per-instance actions, and protection commands are in the [CLI docs](docs/CLI.md).
 
 <details>
-<summary>Want to explore the interface? Use demo mode</summary>
+<summary>Just want to look at the UI? Use demo mode</summary>
 
-Quit any running copy of BroClean, then run this from the source checkout after building:
+Quit any running BroClean first, then run from the source build directory:
 
 ```sh
 open dist/BroClean.app --args --demo --preview-window
 ```
 
-Demo mode uses sample instances. A normal launch reads real local processes.
+Demo mode uses sample instances; a normal launch reads the real processes on your machine.
 
 </details>
 
-## Learn more
+## Learn More
 
-- [Architecture](docs/ARCHITECTURE.md) · [Design system](DESIGN.md)
-- [0.3.0 release notes](docs/RELEASE-0.3.0.md) · [Validation record](docs/VALIDATION.md)
-- [Reproducible browser lab](docs/BROWSER-LAB.md) · [Product behavior](docs/PRODUCT-SPEC.md)
+- [Architecture & Implementation](docs/ARCHITECTURE.md) · [UI Design Spec](DESIGN.md)
+- [0.3.0 Release Notes](docs/RELEASE-0.3.0.md) · [Validation Record](docs/VALIDATION.md)
+- [Repeatable Browser Lab Scenarios](docs/BROWSER-LAB.md) · [Product Behavior Spec](docs/PRODUCT-SPEC.md)
 
-Version 0.3.0 passed **33 Swift Testing tests**, along with Release build, app-signature, and archive verification. Broader system compatibility and long-running behavior still need further validation. Please include your macOS version, browser type, and reproduction steps when [reporting an issue](https://github.com/holynova/BroClean/issues).
+0.3.0 passes **33 Swift Testing tests** and has completed release builds, app signing, and installer verification. Broader system compatibility and long-running validation are still ongoing. If you hit a problem, please report it via [Issues](https://github.com/holynova/BroClean/issues) with your macOS version, browser type, and steps to reproduce.
